@@ -1,0 +1,17 @@
+{
+  "name": "foundation-demo",
+  "version": "0.0.1",
+  "description": "Foundation/sq2 framework training",
+  "ignore": [
+    "Gemfile",
+    ".ruby-version",
+    ".bowerrc",
+    "**/*.sh",
+    "**/*.txt",
+    "**/*.lock"
+  ],
+  "dependencies": {
+    "sassquatch2": "0.21.7"
+  },
+  "license": "MIT"
+}
