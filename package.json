@@ -1,14 +1,10 @@
 {
-	"name": "julep",
+	"name": "foundation-demo",
 	"version": "1.1.2",
-	"description": "Sass utility add-on for Bourbon",
-	"directories": {
-		"doc": "sassdoc/",
-		"dist": "sass/julep.scss"
-	},
+  "description": "Foundation/sq2 framework training",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/meetup/julep.git"
+		"url": "git://github.com/meetup/foundation-demo.git"
 	},
 	"devDependencies": {
 		"bower": "1.4.1",
@@ -20,9 +16,6 @@
 		"grunt-gh-pages": "0.10.0",
 		"grunt-contrib-clean": "0.6.0",
 		"gimme": ""
-	},
-	"bugs": {
-		"url": "https://github.com/meetup/julep/issues"
 	},
 	"author": "adamd@meetup.com",
 	"license": "MIT"
