@@ -3,6 +3,9 @@
 *.sass-cache
 *.ruby-version
 *.lock
+*.map
 .grunt/
 node_modules/
 bower_components/
+assets/css
+assets/js/dist
