@@ -1,0 +1,10 @@
+@import '../../bower_components/meetup-swatches/sass/colors';
+@import '../../bower_components/sassquatch2/sass/globals';
+@import '../../bower_components/sassquatch2/sass/util';
+
+.view-head {
+	position: fixed;
+}
+.view.off {
+	@include pseudoDisplay(none);
+}
