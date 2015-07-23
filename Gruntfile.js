@@ -1,26 +1,80 @@
 module.exports = function(grunt) {
 
+	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	var DIR_BOWER = './bower_components/',
-		DIR_CSS = 'assets/css/',
-		DIR_JS = 'assets/js/',
-		DIR_IMG = 'assets/img/';
+			DIR_CSS = 'assets/css/',
+			DIR_JS = 'assets/js/',
+			DIR_IMG = 'assets/img/';
 
 	grunt.initConfig({
 		bower: grunt.file.readJSON('bower.json'),
+		'exec': {
+			serve: 'python -m SimpleHTTPServer'
+		},
 		'sass': {
 			dist: {
 				files: {
-					"assets/css/style.css": DIR_BOWER + "sassquatch2/sass/sassquatch.scss"
+					'assets/css/sq2.css': DIR_BOWER + 'sassquatch2/sass/sassquatch.scss',
+					'assets/css/eventDetails.css': 'assets/scss/eventDetails.scss',
 				}
 			}
 		},
+		'uglify': {
+
+			options: {
+				sourceMap: true
+			},
+
+			separated_js: {
+				files: {
+					'assets/js/dist/depends.min.js': [
+						DIR_BOWER + 'ractive/ractive.js',
+						DIR_BOWER + 'ractive-load/dist/ractive-load.js',
+						DIR_BOWER + 'rlite/rlite.js',
+						DIR_BOWER + 'moment/moment.js',
+						DIR_BOWER + 'jquery-waypoints/waypoints.min.js',
+						'node_modules/gimme/gimme.js',
+						DIR_BOWER + 'jquery.cookie/jquery.cookie.js',
+						DIR_BOWER + 'jquery-autosize/dist/autosize.js',
+						DIR_JS + 'src/foundation/*.js'
+					],
+					'assets/js/dist/scripts.min.js': [
+						DIR_JS + 'src/*.js'
+					],
+				}
+			}
+
+		},
 		'clean': {
-			css: [DIR_CSS]
+			css: [DIR_CSS],
+			js: DIR_JS + 'dist/'
+		},
+		'watch': {
+
+			scripts: {
+				files: [DIR_JS + 'src/*.js'],
+				tasks: ['uglify'],
+				options: {
+					spawn: false,
+				}
+			},
+
+			css: {
+				files: ['assets/scss/*.scss'],
+				tasks: ['sass'],
+				options: {
+					spawn: false,
+				}
+			}
+
 		}
 	});
-
-	grunt.registerTask('default', ['clean', 'sass']);
+	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('build', ['clean', 'uglify', 'sass']);
+	grunt.registerTask('serve', ['default', 'exec']);
 };

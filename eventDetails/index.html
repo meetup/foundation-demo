@@ -2,11 +2,49 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Foundation Introduction</title>
-    <link rel="stylesheet" href="../assets/css/style.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<title>Event Details Demo</title>
+
+	<!-- Whitney -->
+	<link rel="stylesheet" href="../assets/whitney.css" />
+
+	<!-- Icon font (just until we get SVG working) -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Load Sassquatch2 -->
+	<link rel="stylesheet" href="../assets/css/sq2.css" />
+
+	<!-- Page-specific styles - Your goal is to keep this as small as possible -->
+	<link rel="stylesheet" href="../assets/css/eventDetails.css" />
+
+	<!-- JS you'll want to load before the page loads -->
+	<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/js/dist/depends.min.js"></script>
 </head>
 
 <body>
+
+<!-- the magic in this template gets set up in 'assets/js/src/eventDetails.js' -->
+<script type="text/template" id="main-template">
+
+	<!--
+		Now that we're in the template,
+		just write plain-jane HTML with Handlebars for data
+	-->
+	<section class="stripe stripe--hero inverted"><div class="bounds stripe-heroContent">
+		<h1 class="text--display">{{group.name}}</h1>
+	</div></section>
+
+	<div class="stripe"><div class="bounds">
+		<div class="chunk">
+			<p>Hello whirled</p>
+		</div>
+	</div></div>
+
+</script>
+
+<!-- Your JS -->
+<script type="text/javascript" src="../assets/js/dist/scripts.min.js"></script>
 </body>
 
 </html>
