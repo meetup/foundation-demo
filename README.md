@@ -9,3 +9,10 @@ up and running, use this one liner to clone the repo and install dependencies:
 ```bash
 git clone git@github.com:meetup/foundation-demo.git; cd foundation-demo; ./setup.sh
 ```
+
+## Getting starting with Sassquatch2
+
+1. [Everything is a `view`](https://github.com/meetup/sassquatch2/wiki/View-DOM-structure)
+2. [Hyphens have meaning](https://github.com/meetup/sassquatch2/wiki/Code-standards-&-guidelines#pcv-class-name-convention)
+3. [Read the docs](http://meetup.github.io/sassquatch2/)
+4. [layout tl;dr](https://github.com/meetup/sassquatch2/wiki/tl;dr)
