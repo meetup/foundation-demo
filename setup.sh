@@ -4,7 +4,7 @@ echo "~~~~~~~~ using correct ruby..."
 rbenv install
 
 echo "~~~~~~~~ getting latest for bundler gem..."
-gem install bundler
+sudo gem install bundler
 
 echo "~~~~~~~~ installing required gems..."
 bundle install
