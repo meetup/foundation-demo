@@ -76,5 +76,5 @@ module.exports = function(grunt) {
 	});
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('build', ['clean', 'uglify', 'sass']);
-	grunt.registerTask('serve', ['default', 'exec']);
+	grunt.registerTask('serve', ['build', 'exec']);
 };
