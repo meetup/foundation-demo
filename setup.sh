@@ -10,7 +10,7 @@ echo "~~~~~~~~ installing required gems..."
 bundle install
 
 echo "~~~~~~~~ installing npm modules..."
-npm install
+sudo npm install
 
 echo "~~~~~~~~ installing bower components..."
 bower install
