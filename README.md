@@ -2,12 +2,22 @@
 
 ## Install
 
-`rbenv` isn't required, but [recommended](https://gist.github.com/akdetrick/7604130).
-If you're using a mac laptop, you'll most likely be fine without it. To get this project
-up and running, use this one liner to clone the repo and install dependencies:
+### 1. Make sure you have [Homebrew](http://brew.sh/) installed
+
+If the following terminal command doesn't print a version number...
+```bash
+brew --version
+```
+
+...then run this:
+```bash
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+### 2. Clone the repo and run the setup script
 
 ```bash
-git clone git@github.com:meetup/foundation-demo.git; cd foundation-demo; ./setup.sh
+git clone git@github.com:meetup/foundation-demo.git && cd foundation-demo && ./setup.sh
 ```
 
 ## Getting starting with Sassquatch2

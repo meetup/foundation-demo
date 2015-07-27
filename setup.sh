@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "~~~~~~~~ installing node..."
+brew install node
+
 echo "~~~~~~~~ using correct ruby..."
 rbenv install
 
@@ -16,6 +19,6 @@ echo "~~~~~~~~ installing bower components..."
 bower install
 
 echo "~~~~~~~~ rebuilding..."
-grunt
+grunt build
 
 exit 0
