@@ -17,7 +17,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 ### 2. Clone the repo and run the setup script
 
 ```bash
-git clone git@github.com:meetup/foundation-demo.git && cd foundation-demo && ./setup.sh
+git clone git@github.com:meetup/foundation-demo.git; cd foundation-demo; ./setup.sh
 ```
 
 ## Getting starting with Sassquatch2
