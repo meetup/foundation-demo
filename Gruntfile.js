@@ -68,6 +68,7 @@ module.exports = function(grunt) {
 				files: [DIR_JS + 'src/*.js'],
 				tasks: ['uglify'],
 				options: {
+					livereload: true,
 					spawn: false,
 				}
 			},
@@ -76,6 +77,7 @@ module.exports = function(grunt) {
 				files: ['assets/scss/*.scss'],
 				tasks: ['sass'],
 				options: {
+					livereload: true,
 					spawn: false,
 				}
 			}
