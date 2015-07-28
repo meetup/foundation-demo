@@ -1,3 +1,6 @@
+//
+// Setup tools for playing with routes and URL params
+//
 var router = new Rlite();
 
 function processHash() {
@@ -12,6 +15,10 @@ function getParameterByName(name) {
 	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+
+//
+// Stuff to do depending on what the URL is
+//
 router.add('', function(context){
 	views.show({
 		template: 'main-template',
