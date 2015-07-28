@@ -1,21 +1,24 @@
 #!/bin/bash
 
+echo "~~~~~~~~ installing node..."
+brew install node
+
 echo "~~~~~~~~ using correct ruby..."
 rbenv install
 
 echo "~~~~~~~~ getting latest for bundler gem..."
-gem install bundler
+sudo gem install bundler
 
 echo "~~~~~~~~ installing required gems..."
 bundle install
 
 echo "~~~~~~~~ installing npm modules..."
-npm install
+sudo npm install
 
 echo "~~~~~~~~ installing bower components..."
 bower install
 
 echo "~~~~~~~~ rebuilding..."
-grunt
+grunt build
 
 exit 0
