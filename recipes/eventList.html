@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<title>Event List Recipe</title>
+
+	<!-- Whitney -->
+	<link rel="stylesheet" href="../assets/whitney.css" />
+
+	<!-- Icon font (just until we get SVG working) -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Load Sassquatch2 -->
+	<link rel="stylesheet" href="../assets/css/sq2.css" />
+
+	<!-- CSS Hotfixes (mostly just compensating for Chapstick components) -->
+	<link rel="stylesheet" href="../assets/css/shim.css" />
+
+	<!-- JS you'll want to load before the page loads -->
+	<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/js/dist/depends.min.js"></script>
+</head>
+
+<body>
+
+<script type="text/template" id="list">
+	<div class="stripe"><div class="bounds">
+		<ul>
+			{{#events:i}}
+			<li>
+				<a href="#!/mups/{{i}}" class="display--block card card--event event--{{status}} chunk">
+
+					<div class="row row--spaceBetween">
+
+						<!-- // DATE AND TIME DISPLAY TEXT -->
+
+						{{#if status !== 'past'}}
+							<time datetime="{{helpers.dateFormat(time, "YYYYMMDD")}}" class="row-item--shrink">
+								<h2 class="text--graphic display--inlineBlock">{{helpers.dateFormat(time, "DD")}}</h2>
+
+								<h2>{{helpers.dateFormat(time, "MMM")}}</h2>
+							</time>
+
+						{{else}}
+
+							<div class="ow-item--shrink">
+								<p class="wrap--singleLine--truncate chunk">
+									<span class="text--secondary">{{helpers.dateFormat(time, "MMM Do [at] h:mm a")}}</span>
+								</p>
+							</div>
+
+						{{/if}}
+
+
+						<!-- // ADDTL INFO -->
+							<div class="row-item row-item--shrink align--right">
+
+								<!-- // SPOTS LEFT -->
+								{{#if rsvp_limit && (rsvp_limit - yes_rsvp_count) < 5}}
+									{{#if rsvp_limit == yes_rsvp_count || (rsvp_limit - yes_rsvp_count) <= 0 }}
+										{{#if rsvp_rules.waitlisting == "auto"}}
+											<p class="text--caption">Waitlist available</p>
+										{{else}}
+											<p class="text--caption">No spots left</p>
+										{{/if}}
+									{{else}}
+										<p class="text--caption">{{rsvp_limit - yes_rsvp_count}} spots left</p>
+									{{/if}}
+								{{/if}}
+
+								<!-- // TICKETS -->
+								{{#if rsvp_limit && rsvp_limit - yes_rsvp_count > 0 || !rsvp_limit}}
+									{{#fee}}
+										<p class="wrap--singleLine--truncate text--caption">
+											${{amount}} {{description}}
+										</p>
+									{{/fee}}
+								{{/if}}
+
+							</div>
+
+					</div>
+
+					<div class="chunk">
+						<!-- // DATE AND TIME LONGFORM -->
+						{{#if status !== 'past'}}
+							<p class="wrap--singleLine--truncate chunk">
+								<span class="text--secondary">{{helpers.dateFormat(time, "dddd [at] h:mm a")}}</span>
+							</p>
+						{{else}}
+							<p class="text--secondary">{{yes_rsvp_count}} {{group.who}} went to</p>
+						{{/if}}
+
+						<!-- // MUP TITLE -->
+						<h3 class="text--bold">{{name}}</h3>
+
+					</div>
+
+				</a>
+			</li>
+			{{/events}}
+		</ul>
+	</div></div>
+</script>
+
+<script type="text/template" id="detail">
+	{{#selectedMup}}
+	<div class="stripe"><div class="bounds">
+		<div class="chunk align--center">
+			<h1 class="text--display">{{name}}</h1>
+			<p class="wrap--singleLine--truncate">
+				<a href="#" class="link">{{group.name}}</a>
+			</p>
+		</div>
+	</div></div>
+
+	<div class="stripe"><div class="bounds">
+		<div class="chunk">
+			<p class="text--bold">{{venue.name}}</p>
+			<p class="text--secondary">{{venue.address_1}}</p>
+			{{#how_to_find_us}}<p class="text--caption"><span class="text--bold">How to find us: </span>{{how_to_find_us}}</p>{{/how_to_find_us}}
+		</div>
+		<div class="chunk">
+			<p class="text--bold">{{helpers.dateFormat(time, "dddd MMMM D")}}</p>
+			<p class="text--secondary">{{helpers.dateFormat(time, "h:mma")}}</p>
+		</div>
+
+		<div class="chunk">
+			<p class="text--bold chunk">{{yes_rsvp_count}} {{group.who}} {{#if status == "past"}}went{{else}}going{{/if}}</p>
+		</div>
+
+		<div class="chunk border--top padding--top runningText">
+			{{{description}}}
+		</div>
+	</div></div>
+	{{/selectedMup}}
+</script>
+
+<!-- Your JS -->
+<script type="text/javascript">
+
+
+// -----------------
+// GIMME SOME DATA
+// -----------------
+
+var views = new ViewManager(function(){
+	gimme.apiKey = "7060231d422c3421e3c13406e606631"; // use your own api key!
+
+	var groupId = getParameterByName('mugID') || 1579989;
+
+	// ↓ ↓ ↓ ↓ Where we pick which data we want ↓ ↓ ↓ ↓
+	var shoppingList = [
+		{"gimme": "events", "data":  {"group_id": groupId}}
+	];
+	// ↑ ↑ ↑ ↑ Where we pick which data we want ↑ ↑ ↑ ↑
+
+	gimme.get(shoppingList, true).then(function(data){
+		$.extend(views.data, data);
+
+		// Now that the data is all ready, go ahead and start the router
+		window.addEventListener('hashchange', processHash);
+		processHash();
+	});
+
+});
+
+// ---------------------
+// RENDER THE TEMPLATE
+// ---------------------
+var router = new Rlite();
+
+function processHash() {
+	var hash = location.hash || '#!/';
+	router.run(hash.substr(2));
+}
+
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		results = regex.exec(location.search);
+	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+// ROUTE: mup list (split)
+router.add('', function(context){
+	// set selected MUP
+	views.data.selectedMup = views.data.events[0];
+
+	show_mup_split();
+	views.focus('split');
+});
+// ROUTE: mup detail (split)
+router.add('mups/:i', function(context){
+	// set selected MUP
+	views.data.selectedMup = views.data.events[context.params.i];
+
+	show_mup_split();
+	views.focus('detail');
+});
+
+function show_mup_split(){
+	views.split_show({
+		template: "list",
+		events: {
+		},
+		header : {
+			title: 'Meetups',
+			subtitle: views.data.selectedMup.group.name,
+			buttons: [
+			]
+		}
+	}, {
+		template: "detail",
+		events: {
+		},
+		header : {
+			title: helpers.dateFormat(views.data.selectedMup.time, "dddd MMMM D"),
+			subtitle: 'at ' + views.data.selectedMup.venue.name,
+			buttons: [
+			]
+		}
+	});
+
+}
+
+// ----------------------------
+// ACTUAL JS TO POWER EXAMPLE
+// ----------------------------
+
+</script>
+
+
+<script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>

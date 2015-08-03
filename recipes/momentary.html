@@ -1,0 +1,186 @@
+<!--
+//////////////////
+POPOVER SAMPLE
+-this is broken
+//////////////////
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<title>Momentary Recipe</title>
+
+	<!-- Whitney -->
+	<link rel="stylesheet" href="../assets/whitney.css" />
+
+	<!-- Icon font (just until we get SVG working) -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Load Sassquatch2 -->
+	<link rel="stylesheet" href="../assets/css/sq2.css" />
+
+	<!-- CSS Hotfixes (mostly just compensating for Chapstick components) -->
+	<link rel="stylesheet" href="../assets/css/shim.css" />
+
+	<!-- JS you'll want to load before the page loads -->
+	<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/js/dist/depends.min.js"></script>
+</head>
+
+<body>
+
+<script type="text/template" id="main-template">
+	<div class="stripe"><div class="bounds">
+		<!--
+		//////////////////
+		POPOVER SAMPLE
+		//////////////////
+		-->
+		<h3 class="text--headline chunk"><a href="#" on-click="showPopover">Popover sample</a></h3>
+
+		<!--
+		//////////////////
+		MODAL SAMPLE
+		//////////////////
+		-->
+		<h3 class="text--headline chunk"><a href="#!/modal-sample">Modal sample</a></h3>
+
+		<!--
+		//////////////////
+		DIALOG SAMPLES
+		//////////////////
+		-->
+		<h3 class="text--headline chunk"><a href="javascript:void(0)" on-click="showPlainDialog">Plain dialog</a></h3>
+		<h3 class="text--headline chunk"><a href="javascript:void(0)" on-click="showSpecialDialog">Dialog with custom img and copy</a></h3>
+
+		<!--
+		//////////////////
+		Popover SAMPLE
+		//////////////////
+		-->
+		<h3 class="text--headline chunk"><a href="javascript:void(0)" on-click="showToast">Toast sample</a></h3>
+	</div></div>
+</script>
+
+<script type="text/template" id="modal-template">
+	<!--
+	//////////////////
+	MODAL CONTENT
+	//////////////////
+	-->
+	<div class="stripe"><div class="bounds">
+		<p class="chunk">This is where the modal content goes.</p>
+	</div></div>
+</script>
+
+<!-- Your JS -->
+<script type="text/javascript">
+
+
+// -----------------
+// GIMME SOME DATA
+// -----------------
+var views = new ViewManager(function(){
+	window.addEventListener('hashchange', processHash);
+	processHash();
+});
+
+// ---------------------
+// RENDER THE TEMPLATE
+// ---------------------
+var router = new Rlite();
+
+function processHash() {
+	var hash = location.hash || '#!/';
+	router.run(hash.substr(2));
+}
+
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		results = regex.exec(location.search);
+	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+router.add('', function(context){
+	views.show({
+		template: 'main-template',
+		events: {
+			'showPopover' : showPopover,
+			'showPlainDialog': showPlainDialog,
+			'showSpecialDialog': showSpecialDialog
+		},
+		observe: {
+		},
+		header : {
+			title: 'Popping things up',
+			buttons: [
+					// { label: "Actions", icon: "ellipsis-h", fn: showPopover }
+			]
+		}
+	});
+});
+
+// ------------
+// MODAL VIEW
+// ------------
+router.add('modal-sample', function(context){
+	views.modal_show({
+		template: 'modal-template',
+		events: {
+		},
+		observe: {
+		},
+		header : {
+			title: 'This is a modal',
+			buttons: [
+			]
+		}
+	});
+});
+
+// ----------------------------
+// ACTUAL JS TO POWER EXAMPLE
+// ----------------------------
+
+function showPopover(event) {
+	views.momentary_show({
+		$target: $(event.node),
+		type	 : 'popover',
+		buttons: [
+			{label: "Look at", fn: function(){ alert('LQQK @'); return false; }},
+			{label: "All these", fn: function(){ alert('Yup, all of em'); return false; }},
+			{label: "Actions", fn: function(){ alert('What the function?'); return false; }},
+			{label: "To take", fn: function(){ alert('Fire the function'); return false; }}
+		]
+	});
+}
+
+function showPlainDialog(event) {
+	views.dialog_show({
+		headline: "Headline copy",
+		body: "This is the body copy",
+		primaryAction: { label: "Primary Action", fn: function(){ alert('Primary action happened'); }}
+	});
+}
+
+function showSpecialDialog(event) {
+	views.dialog_show({
+		graphic: {src: 'https://placekitten.com/g/72/72'},
+		headline: "Special dialog",
+		body: "This is the body copy",
+		primaryAction: { label: "Primary Action", fn: function(){ alert('Primary action happened'); }},
+		dismissText: "Cancel"
+	});
+}
+
+</script>
+
+
+<script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>

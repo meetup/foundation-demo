@@ -125,6 +125,7 @@ Momentary.prototype = {
     	self.$el.one(transitionEnd, function(){
 			self.current_view.teardown();
     	});
+    	console.log('hide firing');
 	}
 
 };

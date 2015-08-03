@@ -21,6 +21,7 @@ module.exports = function(grunt) {
 				files: {
 					'assets/css/sq2.css': DIR_BOWER + 'sassquatch2/sass/sassquatch.scss',
 					'assets/css/eventDetails.css': 'assets/scss/eventDetails.scss',
+					'assets/css/shim.css': 'assets/scss/shim.scss',
 				}
 			}
 		},

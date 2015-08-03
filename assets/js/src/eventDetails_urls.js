@@ -19,7 +19,7 @@ function getParameterByName(name) {
 //
 // Stuff to do depending on what the URL is
 //
-router.add('', function(context){
+router.add('', function(context){ // homepage
 	views.show({
 		template: 'main-template',
 		events: {
@@ -27,10 +27,46 @@ router.add('', function(context){
 		observe: {
 		},
 		header : {
-			title: views.data.group.name,
+			title: views.data.event.name,
 			buttons: [
 				{ label: 'Actions', icon: 'ellipsis-h', fn: function(){alert('take action')} }
 			]
+		}
+	});
+
+	// this is weird, make it easier
+	$('.js-fndTextTrunc').each(function() {
+		var $el = $(this);
+		ellipsis($el, 7, { wrapWith: '<p>', more: true, title: false }); // see js/src/foundation/foundationTextTrunc for this code
+	});
+
+	$(document.body).on('click', '[data-ellipsis-applied] [data-toggle-ellipsis]', function(e) { toggleEllipsis(e) });
+
+});
+
+router.add('mup-photos', function(context){ //photo view
+	views.show({
+		template: 'photos-template',
+		events: {
+		},
+		observe: {
+		},
+		header : {
+			title: views.data.event.name,
+			subtitle: views.data.photos.length + ' photos'
+		}
+	});
+
+});
+
+router.add('attendees', function(context){ //photo view
+	views.modal_show({
+		template: "member-listing-template",
+		events: {
+		},
+		header : {
+			title: views.data.event.yes_rsvp_count + ' people',
+			subtitle: 'to ' + views.data.event.name
 		}
 	});
 });

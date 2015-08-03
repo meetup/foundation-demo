@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<title>Event Details Demo</title>
+
+	<!-- Whitney -->
+	<link rel="stylesheet" href="../assets/whitney.css" />
+
+	<!-- Icon font (just until we get SVG working) -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Load Sassquatch2 -->
+	<link rel="stylesheet" href="../assets/css/sq2.css" />
+
+	<!-- Page-specific styles compiled from 'assets/scss/eventDetails.scss' - Your goal is to keep this as small as possible -->
+	<link rel="stylesheet" href="../assets/css/eventDetails.css" />
+
+	<!-- JS you'll want to load before the page loads -->
+	<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/js/dist/depends.min.js"></script>
+</head>
+
+<body class="hasFloatingAction">
+
+<script type="text/template" id="main-template">
+
+	<!--
+		Now that we're in the template,
+		just write plain-jane HTML with Handlebars for data
+	-->
+	<section class="stripe stripe--photoHero inverted" style="background-image:url('https://s3.amazonaws.com/uploads.hipchat.com/73754/1695885/GpuO4MtDCIY8gh1/Map-orange.png')"><div class="bounds stripe-heroContent">
+	</div></section>
+
+	<div class="stripe"><div class="bounds">
+		<div class="chunk align--center">
+			<h1 class="text--display">MUP Name</h1>
+			<p class="wrap--singleLine--truncate">
+				<a href="#" class="link">MUG name</a>
+			</p>
+		</div>
+	</div></div>
+
+	<div class="stripe"><div class="bounds">
+		<div class="chunk">
+			<p class="text--bold">Date</p>
+			<p class="text--caption">Time</p>
+		</div>
+		<div class="chunk">
+			<p class="text--bold">Venue Name</p>
+			<p class="text--caption">Venue Address</p>
+		</div>
+		<div class="chunk">
+			<div class="row chunk">
+				<p class="row-item text--bold">123 Members</p>
+				<a href="#" class="row-item--shrink link">See all</a>
+			</div>
+			<div class="exactList">
+				<ul class="exactList-content inlineblockList">
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+					<li><div class="avatar avatar--person" style="background-image:url('https://placekitten.com/g/42/60')"></div></li>
+				</ul>
+			</div>
+		</div>
+		<div class="floatingAction">
+			<a href="#" class="floatingAction-content button button--primary button--fullWidth">Attend</a>
+		</div>
+		<div class="chunk border--top padding--top runningText">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta placeat possimus porro a soluta facilis, mollitia, magnam at libero, voluptatibus inventore nam consequatur? Esse qui assumenda incidunt in cumque error.</p>
+		</div>
+	</div></div>
+	<div class="stripe"><div class="bounds">
+		<div class="row chunk">
+			<div class="row-item--shrink"><i class="fa fa-picture-o"></i></div>
+			<p class="row-item text--bold">123 Photos</p>
+			<a href="#" class="row-item--shrink link">See all</a>
+		</div>
+		<ul class="gridList gridList--photoGrid gridList--has3 chunk">
+			<li><a href="#" class="thumb" style="background-image:url('http://lorempixel.com/400/200')"></a></li>
+			<li><a href="#" class="thumb" style="background-image:url('http://lorempixel.com/400/200')"></a></li>
+			<li><a href="#" class="thumb" style="background-image:url('http://lorempixel.com/400/200')"></a></li>
+			<li><a href="#" class="thumb" style="background-image:url('http://lorempixel.com/400/200')"></a></li>
+			<li><a href="#" class="thumb" style="background-image:url('http://lorempixel.com/400/200')"></a></li>
+			<li><a href="#" class="thumb" style="background-image:url('http://lorempixel.com/400/200')"></a></li>
+		</ul>
+	</div></div>
+	<div class="stripe stripe--collection">
+		<div class="bounds">
+			<ul>
+				<li class="row">
+					<div class="row-item row-item--shrink">
+						<div class="avatar avatar--person avatar--small" style="background-image:url('https://placekitten.com/g/42/60')"></div>
+					</div>
+					<div class="row-item">
+						<p>
+							<span class="text--bold">Username</span>
+							<span> User comment goes here</span>
+						</p>
+						<div class="text--caption">
+							<span>10 days ago</span> &middot;
+							<span>3 Likes</span> &middot;
+							<a href="#" class="link">Like</a>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</script>
+
+<!-- Your JS -->
+<script type="text/javascript" src="../assets/js/dist/scripts.min.js"></script>
+
+
+
+<script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>

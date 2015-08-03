@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<title>Topic Pill List Recipe</title>
+
+	<!-- Whitney -->
+	<link rel="stylesheet" href="../assets/whitney.css" />
+
+	<!-- Icon font (just until we get SVG working) -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Load Sassquatch2 -->
+	<link rel="stylesheet" href="../assets/css/sq2.css" />
+
+	<!-- CSS Hotfixes (mostly just compensating for Chapstick components) -->
+	<link rel="stylesheet" href="../assets/css/shim.css" />
+
+	<!-- JS you'll want to load before the page loads -->
+	<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/js/dist/depends.min.js"></script>
+</head>
+
+<body>
+
+<script type="text/template" id="main-template">
+	{{#member}}
+	<div class="stripe"><div class="bounds">
+		<h3 class="text--headline chunk">A vote for <strong>{{name}}</strong> is a vote for</h3>
+		<ul class="inlineblockList">
+			{{#topics}}
+			<li>
+				<div class="toggleButton">
+					<input class="toggleButton-input" type="checkbox" name="{{urlkey}}" id="{{urlkey}}" value="{{name}}" />
+					<label class="toggleButton-label" for="{{urlkey}}">{{name}}</label>
+				</div>
+			</li>
+			{{/topics}}
+		</ul>
+	</div></div>
+	{{/member}}
+</script>
+
+<!-- Your JS -->
+<script type="text/javascript">
+
+
+// -----------------
+// GIMME SOME DATA
+// -----------------
+
+var views = new ViewManager(function(){
+	gimme.apiKey = "7060231d422c3421e3c13406e606631"; // use your own api key!
+
+	// ↓ ↓ ↓ ↓ Where we pick which data we want ↓ ↓ ↓ ↓
+	var shoppingList = [
+		{"gimme": "member", "data":  {"id": "95860782"}}
+	];
+	// ↑ ↑ ↑ ↑ Where we pick which data we want ↑ ↑ ↑ ↑
+
+	gimme.get(shoppingList, true).then(function(data){
+		$.extend(views.data, data);
+
+		// Now that the data is all ready, go ahead and start the router
+		window.addEventListener('hashchange', processHash);
+		processHash();
+		console.log(views.data.member);
+	});
+
+});
+
+// ---------------------
+// RENDER THE TEMPLATE
+// ---------------------
+var router = new Rlite();
+
+function processHash() {
+	var hash = location.hash || '#!/';
+	router.run(hash.substr(2));
+}
+
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		results = regex.exec(location.search);
+	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+router.add('', function(context){
+	views.show({
+		template: 'main-template',
+		events: {
+		},
+		observe: {
+		},
+		header : {
+			title: 'Topic like it\'s hot',
+			buttons: [
+			]
+		}
+	});
+});
+
+// ----------------------------
+// ACTUAL JS TO POWER EXAMPLE
+// ----------------------------
+
+</script>
+
+
+<script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>

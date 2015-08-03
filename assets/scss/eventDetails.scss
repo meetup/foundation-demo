@@ -2,9 +2,15 @@
 @import '../../bower_components/sassquatch2/sass/globals';
 @import '../../bower_components/sassquatch2/sass/util';
 
-.view-head {
-	position: fixed;
-}
-.view.off {
-	@include pseudoDisplay(none);
-}
+//
+// EXTRA-CREDIT: rendering guest count
+//
+// .avatar--person[data-guest-count] {
+// 	@extend %avatarCharm;
+// 	display: none;
+// 	&:after {
+// 		background-color: $C_collectionBGLight;
+// 		color: $C_textPrimary;
+// 		content: attr(data-guest-count);
+// 	}
+// }
