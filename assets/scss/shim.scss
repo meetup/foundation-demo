@@ -22,14 +22,14 @@
 
 // MODAL VIEW FULL
 // full screen at all screen widths
-.view--modal-full {
+.view.view--modal-full {
 	@include modal-full;
 	z-index: map-get($zindex-map, "modal");
 }
 
 // MODAL VIEW SNAP
 // full at narrow widths, dialog at wide widths
-.view--modal-snap {
+.view.view--modal-snap {
 	@include modal-full;
 	@include atMediaUp(small){
 		@include modal-dialog;

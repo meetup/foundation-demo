@@ -14,3 +14,30 @@
 // 		content: attr(data-guest-count);
 // 	}
 // }
+
+.stripe--overlap {
+
+	&:before {
+		border-bottom: ($space-half+$space) solid white;
+		bottom: 0;
+		box-sizing: border-box;
+		content: '';
+		display: block;
+		position: absolute;
+		width: 100%;
+	}
+
+	& + .stripe {
+		border: 0 !important;
+	}
+}
+
+.dateBox {
+	box-sizing: border-box;
+	border-radius: 3px;
+	background: $C_contentBG;
+	border: 1px solid $C_border;
+	height: $media-l;
+	width: $media-l;
+	padding: $space-half;
+}
