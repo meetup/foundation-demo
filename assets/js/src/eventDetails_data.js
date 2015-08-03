@@ -14,7 +14,7 @@ var views = new ViewManager(function(){
 		{"gimme": "group", "data":  {"group_id": groupId}},
 		{"gimme": "event", "data":  {"event_id": eventId}, "children": [
         {"gimme": "event_comments", "match": [ ["id", "event_id"] ] }
-      ] }
+      ] },
         {"gimme": "photos", "key": "photosShort", "data": {"page": 6}, "match": [ ["event_id", eventId] ] },
         {"gimme": "photos", "match": [ ["event_id", eventId] ] },
 		{"gimme": "rsvps", "data":  {"event_id": eventId}}
